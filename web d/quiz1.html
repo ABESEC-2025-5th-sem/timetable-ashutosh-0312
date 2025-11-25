@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz App Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #d0e8f2, #86c5d8);
+      background-size: 400% 400%;
+      animation: backgroundShift 15s ease infinite alternate;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    @keyframes backgroundShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(20px);
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      padding: 2rem;
+      color: #333;
+      animation: fadeInScale 0.8s ease;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h2 {
+      margin-bottom: 1.2rem;
+      font-size: 1.8rem;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #f9f9f9;
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #1d90f5;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #187cd7;
+      transform: translateY(-2px);
+    }
+
+    .quiz-container {
+      display: none;
+    }
+
+    #timer {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #444;
+      text-align: right;
+    }
+
+    .question {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1rem 0;
+    }
+
+    .options button {
+      width: 100%;
+      margin: 0.4rem 0;
+      padding: 0.7rem;
+      border-radius: 6px;
+      background-color: #e3f2fd;
+      color: #333;
+      border: 1px solid #90caf9;
+      transition: all 0.3s ease;
+    }
+
+    .options button:hover:not(:disabled) {
+      background-color: #bbdefb;
+      transform: scale(1.03);
+    }
+
+    .options button:disabled {
+      background-color: #f0f0f0;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    #result {
+      margin-top: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #2e7d32;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .question {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="loginContainer">
+    <h2>Login to Quiz</h2>
+    <input type="text" id="admissionNo" placeholder="Admission Number" required />
+    <input type="text" id="quizId" placeholder="Quiz ID" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button onclick="login()">Start Quiz</button>
+  </div>
+
+  <div class="card quiz-container" id="quizContainer">
+    <div id="timer">Time left: 30s</div>
+    <div class="question" id="question">Question text</div>
+    <div class="options" id="options"></div>
+    <div class="controls">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Lisbon"], answer: "Paris" },
+      { question: "Which language is used for web apps?", options: ["Python", "JavaScript", "C++", "Java"], answer: "JavaScript" },
+      { question: "What does HTML stand for?", options: ["Hyper Text Markup Language", "Hot Mail", "How to Make Lasagna", "Hyperlinks and Text Markup Language"], answer: "Hyper Text Markup Language" },
+      { question: "Which planet is known as the Red Planet?", options: ["Earth", "Venus", "Mars", "Jupiter"], answer: "Mars" },
+      { question: "What is the largest mammal?", options: ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"], answer: "Blue Whale" }
+    ];
+
+    let currentQuestionIndex = 0;
+    let selectedAnswers = Array(quizData.length).fill(null);
+    let timer;
+    let timeLeft = 30;
+    let timeExpired = false;
+
+    const loginContainer = document.getElementById('loginContainer');
+    const quizContainer = document.getElementById('quizContainer');
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultEl = document.getElementById('result');
+    const timerEl = document.getElementById('timer');
+
+    function login() {
+      const admissionNo = document.getElementById('admissionNo').value.trim();
+      const quizId = document.getElementById('quizId').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (admissionNo && quizId && password) {
+        loginContainer.style.display = 'none';
+        quizContainer.style.display = 'block';
+        loadQuestion();
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+
+    function loadQuestion() {
+      const currentQuestion = quizData[currentQuestionIndex];
+      questionEl.textContent = currentQuestion.question;
+      optionsEl.innerHTML = '';
+
+      currentQuestion.options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option;
+
+        if (selectedAnswers[currentQuestionIndex] === option) {
+          button.style.backgroundColor = '#90caf9';
+        }
+
+        button.disabled = timeExpired;
+        button.onclick = () => {
+          if (!timeExpired) selectOption(button, option);
+        };
+        optionsEl.appendChild(button);
+      });
+
+      resetTimer();
+      updateControls();
+      resultEl.textContent = '';
+      timerEl.style.display = 'block';
+    }
+
+    function selectOption(button, option) {
+      selectedAnswers[currentQuestionIndex] = option;
+      const buttons = optionsEl.querySelectorAll('button');
+      buttons.forEach(btn => (btn.style.backgroundColor = ''));
+      button.style.backgroundColor = '#90caf9';
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timeLeft = 30;
+      timerEl.textContent = `Time left: ${timeLeft}s`;
+      timeExpired = false;
+      timer = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `Time left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          timeExpired = true;
+          disableOptions();
+        }
+      }, 1000);
+    }
+
+    function disableOptions() {
+      const buttons = optionsEl.querySelectorAll('button');
+      buttons.forEach(btn => (btn.disabled = true));
+    }
+
+    function calculateScore() {
+      clearInterval(timer);
+      let score = 0;
+      quizData.forEach((q, index) => {
+        if (selectedAnswers[index] === q.answer) {
+          score++;
+        }
+      });
+      questionEl.textContent = "Quiz Completed!";
+      optionsEl.innerHTML = '';
+      timerEl.style.display = 'none';
+      resultEl.textContent = `Your score: ${score} / ${quizData.length}`;
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      submitBtn.style.display = 'none';
+    }
+
+    function updateControls() {
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === quizData.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        loadQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < quizData.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+      }
+    });
+
+    submitBtn.addEventListener('click', calculateScore);
+  </script>
+</body>
+</html>

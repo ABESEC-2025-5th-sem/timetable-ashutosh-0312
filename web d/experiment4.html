@@ -1,0 +1,202 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Book Store - Cart</title> 
+    <style> 
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f4; 
+        } 
+        header { 
+            background-color: #ffcc00; 
+            color: #fff; 
+            text-align: center; 
+            padding: 20px; 
+            font-size: 20px; 
+        } 
+        .nav-links { 
+            margin-top: 10px; 
+        } 
+        .nav-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin:  15px; 
+            padding: 10px; 
+            border: 1px solid transparent; 
+            transition: border 0.3s; 
+        } 
+        .nav-links a:hover { 
+            border-bottom: 1px solid #fff; 
+        } 
+        .cart-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 20px; 
+            flex: 1; 
+        } 
+        .cart-item { 
+            display: flex; 
+            justify-content: space-between; 
+            width: 80%; 
+            padding: 10px; 
+            margin: 10px 0; 
+            background-color: #fff; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+        } 
+        .cart-item img { 
+            max-width: 80px; 
+            max-height: 100px; 
+            margin-right: 20px; 
+        } 
+        .cart-item-info { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+        } 
+        .remove-item { 
+            background-color: #dc3545; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            cursor: pointer; 
+            font-size: 14px; 
+            align-self: center; 
+            border-radius: 20px; 
+        } 
+        .remove-item:hover { 
+            background-color: #c82333; 
+        } 
+        .total-price { 
+            font-size: 18px; 
+            margin: 20px 0; 
+        } 
+        .checkout-btn { 
+            background-color: #62e312c1; 
+            color: white; 
+            border: 2px solid white; 
+            padding: 10px 20px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            border-radius: 20px; 
+        } 
+        .checkout-btn:hover { 
+            background-color: #db488a; 
+        } 
+        footer { 
+            background-color: #333; 
+            color: #fff; 
+            text-align: left; 
+            padding: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        } 
+        .contact-info { 
+            max-width: 60%; 
+        } 
+        .map-container { 
+            width: 30%; 
+        } 
+        iframe { 
+            width: 450px; 
+            height: 150px; 
+            border: 0; 
+        } 
+    </style> 
+</head> 
+<body> 
+ 
+<header> 
+    <h1 style="font-size:45px;">BOOK STORE</h1> 
+    <div class="nav-links"> 
+        <a href="#fiction">Fiction</a> 
+        <a href="#horror">Horror</a> 
+        <a href="#biography">Biography</a> 
+        <a href="#autobiography">Autobiography</a> 
+        <a href="#comics">Comics</a> 
+        <a href="#new-arrivals">New Arrivals</a> 
+        <a href="#best-sellers">Best Sellers</a> 
+        <a href="#categories">Categories</a> 
+        <a href="#cart">Cart</a> <!-- New Cart Link --> 
+    </div> 
+</header> 
+ 
+<div class="cart-container" id="cart"> 
+    <h2>Your Cart</h2> 
+     
+    <!-- Cart Item 1 --> 
+    <div class="cart-item"> 
+        <img src="book1.jpg" alt="A Game of Thrones"> 
+        <div class="cart-item-info"> 
+            <h3>Harry Potter</h3> 
+            <p><strong>Price:</strong> $5.99</p> 
+        </div> 
+        <button class="remove-item" onclick="removeItem('A Game of Thrones')">Remove</button> 
+    </div> 
+ 
+    <!-- Cart Item 2 --> 
+    <div class="cart-item"> 
+        <img src="book3.jpg" alt="A Clash of Kings"> 
+        <div class="cart-item-info"> 
+            <h3>Harry Potter</h3> 
+            <p><strong>Price:</strong> $9.99</p> 
+        </div> 
+        <button class="remove-item" onclick="removeItem('A Clash of Kings')">Remove</button> 
+    </div> 
+ 
+    <!-- Cart Item 3 --> 
+    <div class="cart-item"> 
+        <img src="book.jpg" alt="A Storm of Swords"> 
+        <div class="cart-item-info"> 
+            <h3>Harry Potter</h3> 
+            <p><strong>Price:</strong> $10.99</p> 
+        </div> 
+        <button class="remove-item" onclick="removeItem('A Storm of Swords')">Remove</button> 
+    </div> 
+ 
+    <!-- Total Price --> 
+    <div class="total-price"> 
+        <p><strong>Total:</strong> $39.97</p> 
+    </div> 
+ 
+    <!-- Checkout Button --> 
+    <button class="checkout-btn">Proceed to Checkout</button> 
+</div> 
+ 
+<footer> 
+    <div class="contact-info"> 
+        <p>Address: 123 Book St, Booktown, BK 12345</p> 
+        <p>Email: contact@mybookstore.com</p> 
+        <p>Phone: (123) 456-7890</p> 
+    </div> 
+    <div class="map-container"> 
+        <iframe  
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1621.57268153598
+ 72!2d77.42893398463596!3d28.606058916216803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!
+ 3m3!1m2!1s0x390ceff84329c05f%3A0xc8dcb4fd0b21a6c9!2sCrossword%2C%20Gaur%20Cit
+ y%20Mall%2C%20Noida!5e0!3m2!1sen!2sin!4v1727270480861!5m2!1sen!2sin" width="600" 
+height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer
+when-downgrade"  
+            loading="lazy"></iframe> 
+    </div> 
+</footer> 
+ 
+<script> 
+    function removeItem(itemName) { 
+        alert(itemName + " has been removed from your cart."); 
+        // Logic for removing item from the cart can be added here 
+    } 
+</script> 
+ 
+</body> 
+</html>

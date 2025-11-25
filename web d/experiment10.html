@@ -1,0 +1,170 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Survey Form</title> 
+    <style> 
+        /* Body styling with background image */ 
+        body { 
+            font-family: Arial, sans-serif; 
+            background: url('blue.jpg') no-repeat center center fixed;  
+            background-size: cover;  
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        } 
+ 
+        .form-container { 
+            background-image: url('sky.jpg'); /* Add your image here */ 
+            background-size: cover; /* Cover the entire div */ 
+            background-position: center; /* Center the image */ 
+            width: 80%; 
+            max-width: 800px; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */ 
+        } 
+ 
+        h2 { 
+            color: #ffffff; 
+            text-align: center; 
+            text-transform: uppercase; 
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+            font-size: 50px; 
+        } 
+ 
+        .form-group { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        } 
+ 
+        .form-group label { 
+            font-weight: bold; 
+            color: #ffffff; 
+            width: 25%; 
+        } 
+ 
+        .form-group input[type="text"], 
+        .form-group input[type="email"], 
+        .form-group input[type="radio"], 
+        .form-group select, 
+        .form-group textarea { 
+            width: 70%; 
+            padding: 8px; 
+            margin: 5px 0; 
+            border: 1px solid #444444; 
+            border-radius: 5px; 
+            background-color: #aba5a500; 
+        } 
+ 
+        input[type="submit"] { 
+            background-color: #989496; 
+            color: white; 
+            padding: 10px 20px; 
+            border: 2px solid #520175d8; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-size: 20px; 
+            font-weight: 600; 
+            width: 800px; 
+            text-transform: uppercase; 
+            margin: 10px 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;           
+        } 
+ 
+        input[type="submit"]:hover { 
+            background-color: #f6edf2c7; 
+        } 
+ 
+        input::placeholder { 
+            color: #ffffff; 
+            font-style: italic;   
+        } 
+ 
+        input, textarea { 
+            color: rgb(248, 248, 183);   
+            font-family: Arial, sans-serif;   
+            background-color: #f0f0f0;  
+            border: 2px solid #ccc;   
+            padding: 10px;   
+            font-size: 16px;  
+        } 
+ 
+        textarea::placeholder { 
+            color: rgb(255, 255, 255);   
+            font-style: italic;   
+        } 
+ 
+    </style> 
+</head> 
+<body> 
+ 
+    <div class="form-container"> 
+        <h2>Customer Feedback Survey</h2> 
+        <form method="post"> 
+            <!-- Question 1: Experience Rating --> 
+            <div class="form-group"> 
+                <label for="experience">How would you rate your overall experience?</label><br> 
+                <input type="radio" id="excellent" name="experience" value="Excellent"> 
+                <label for="excellent">Excellent</label> 
+                <input type="radio" id="good" name="experience" value="Good"> 
+                <label for="good">Good</label> 
+                <input type="radio" id="average" name="experience" value="Average"> 
+                <label for="average">Average</label> 
+                <input type="radio" id="poor" name="experience" value="Poor"> 
+                <label for="poor">Poor</label> 
+            </div> 
+ 
+            <!-- Question 2: Service Satisfaction --> 
+            <div class="form-group"> 
+                <label for="service">How satisfied are you with our service?</label><br> 
+                <input type="radio" id="very_satisfied" name="service" value="Very Satisfied"> 
+                <label for="very_satisfied">Very Satisfied</label> 
+                <input type="radio" id="satisfied" name="service" value="Satisfied"> 
+                <label for="satisfied">Satisfied</label> 
+                <input type="radio" id="neutral" name="service" value="Neutral"> 
+                <label for="neutral">Neutral</label> 
+                <input type="radio" id="dissatisfied" name="service" value="Dissatisfied"> 
+                <label for="dissatisfied">Dissatisfied</label> 
+            </div> 
+ 
+            <!-- Question 3: Likelihood of Recommendation --> 
+            <div class="form-group"> 
+                <label for="recommendation">How likely are you to recommend us to 
+others?</label><br> 
+                <input type="radio" id="very_likely" name="recommendation" value="Very Likely"> 
+                <label for="very_likely">Very Likely</label> 
+                <input type="radio" id="likely" name="recommendation" value="Likely"> 
+                <label for="likely">Likely</label> 
+                <input type="radio" id="unlikely" name="recommendation" value="Unlikely"> 
+                <label for="unlikely">Unlikely</label> 
+            </div> 
+ 
+            <!-- Question 4: Areas for Improvement --> 
+            <div class="form-group"> 
+                <label for="improvements">What areas do you think we could improve?</label><br> 
+                <textarea id="improvements" name="improvements" rows="4" cols="50" 
+placeholder="Your feedback on areas of improvement"></textarea> 
+            </div> 
+ 
+            <!-- Question 5: Additional Comments --> 
+            <div class="form-group"> 
+                <label for="comments">Any additional comments or suggestions?</label><br> 
+                <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Your 
+comments"></textarea> 
+            </div> 
+ 
+            <!-- Submit Button --> 
+            <input type="submit" value="Submit Survey"> 
+        </form> 
+    </div> 
+ 
+</body> 
+</html>

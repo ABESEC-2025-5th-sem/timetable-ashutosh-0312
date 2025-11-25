@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            display: flex;
+            background-color: #b1c81fea;
+            overflow: hidden;
+            align-items: center;
+        }
+        .navbar img {  
+            height: 50px;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+        .navbar a {
+            flex: 1;
+            padding: 14px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+        .navbar a:hover {
+            background-color: #b0aeae;
+            color: black;
+            border-radius: 20px solid black;
+        }
+        @media (max-width: 900px) {
+            .navbar {
+                background-color: red;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="https://images.pexels.com/photos/1337380/pexels-photo-1337380.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Logo">
+        <a href="#home"><i class="fas fa-home"></i> Home</a>
+        <a href="#services"><i class="fas fa-concierge-bell"></i> Services</a>
+        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>   
+</body>
+</html>

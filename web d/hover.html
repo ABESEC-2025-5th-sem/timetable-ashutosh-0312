@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      position: relative;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .tooltip-message {
+      display: none;
+      position: absolute;
+      top: -30px;
+      left: 0;
+      background-color: #ffefef;
+      color: #c0392b;
+      border: 1px solid #e74c3c;
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Login</h2>
+
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Username" required>
+      <div class="tooltip-message" id="usernameTooltip">Username must be at least 4 characters</div>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required>
+      <div class="tooltip-message" id="passwordTooltip">Password must be at least 6 characters and include a number</div>
+    </div>
+
+    <button type="submit">Login</button>
+  </div>
+
+  <script>
+    function toggleTooltip(inputId, tooltipId) {
+      const input = document.getElementById(inputId);
+      const tooltip = document.getElementById(tooltipId);
+
+      input.addEventListener("mouseenter", () => tooltip.style.display = "block");
+      input.addEventListener("mouseleave", () => tooltip.style.display = "none");
+    }
+
+    toggleTooltip("username", "usernameTooltip");
+    toggleTooltip("password", "passwordTooltip");
+  </script>
+
+</body>
+</html>

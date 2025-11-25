@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Repeat Demo</title>
+    <Style>
+        /* General Body Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #4a484800;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 80px;
+        background-image: url('mn.jpg');
+        background-repeat: no-repeat;
+        background-position:unset;
+        background-size:  100vw 100vh;
+    }
+
+    /* Demo Section Styles */
+    .demo {
+      
+        width: 80%;
+        max-width: 900px;
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo h2 {
+        font-size: 24px;
+        color: #333;
+    }
+
+   
+    .background {
+        width: 100%;
+        height: 200px;
+        margin-top: 10px;
+        background-image: url('bulb.jpg');
+        background-size: 100px 100px; 
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+    }
+
+
+    .repeat {
+        background-repeat: repeat;
+    }
+
+    .repeat-x {
+        background-repeat: repeat-x;
+    }
+
+    .repeat-y {
+        background-repeat: repeat-y;
+    }
+
+    .no-repeat {
+        background-repeat: no-repeat;
+        background-size: cover;  
+    }
+
+    </Style>
+</head>
+<body>
+
+    <div class="demo">
+        <h2>Background Repeat: repeat</h2>
+        <div class="background repeat">
+        </div>
+    </div>
+
+    <div class="demo">
+        <h2>Background Repeat: repeat-x</h2>
+        <div class="background repeat-x">
+        </div>
+    </div>
+
+    <div class="demo">
+        <h2>Background Repeat: repeat-y</h2>
+        <div class="background repeat-y">
+        </div>
+    </div>
+
+    <div class="demo">
+        <h2>Background Repeat: no-repeat</h2>
+        <div class="background no-repeat">
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Vertical Parts Layout</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 25% 50% 25%;
+            grid-template-rows: 1fr;
+            gap: 0;
+        }
+
+        .part1 {
+            background-color: #f1c40f; 
+            padding: 10px;
+            height: 80%; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+        }
+
+        .part2 {
+            background-color: #80d30c; /* Green */
+            padding: 10px;
+            display: grid;
+            grid-template-rows: 40% 1fr; /* 40% for horizontal block, remaining for squares */
+            gap: 10px;
+            height: 80%; /* Cover entire height of Part 2 */
+        }
+
+        .horizontal-block {
+            background-color: #e74c3c; /* Red */
+            height: 80%;
+        }
+
+        .square-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for squares */
+            gap: 5px;
+        }
+
+        .square {
+            background-color: #dde726; 
+            padding-bottom: 80%; 
+            position: relative;
+        }
+
+        .part3 {
+            background-color: #9b59b6; 
+            padding: 10px;
+            display: grid;
+            grid-template-rows: 30% 70%; 
+            gap: 10px;
+            height: 100%; 
+        }
+
+        .part3 .block {
+            height: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="part1">
+        <h2>Part 1</h2>
+        <p>part 1</p>
+    </div>
+
+    <div class="part2">
+        <div class="horizontal-block">
+            <h2>Horizontal Block</h2>
+            <p> Part 2.</p>
+        </div>
+        <div class="square-container">
+            <div class="square">
+                <h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Block 1</h3>
+            </div>
+            <div class="square">
+                <h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Block 2</h3>
+            </div>
+            <div class="square">
+                <h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Block 3</h3>
+            </div>
+            <div class="square">
+                <h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Block 4</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="part3">
+        <div class="block" style="background-color: #20c37c;"> <!-- Orange -->
+            <h2>Top Block</h2>
+            <p>Block  3.</p>
+        </div>
+        <div class="block" style="background-color: #c85d68;"> <!-- Dark Blue -->
+            <h2>Bottom Block</h2>
+            <p>Block 3.</p>
+        </div>
+    </div>
+</body>
+
+</html>

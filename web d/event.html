@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input</title>
+</head>
+<body>
+    <h1>User Information</h1>
+    <form id="userForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="rollNo">Roll No:</label>
+        <input type="text" id="rollNo" name="rollNo" required><br><br>
+
+        <label for="branch">Branch:</label>
+        <input type="text" id="branch" name="branch" required><br><br>
+
+        <button type="button" onclick="displayInfo()">Submit</button>
+    </form>
+
+   
+
+    <script>
+        function displayInfo() {
+            const name = document.getElementById('name').value;
+            const rollNo = document.getElementById('rollNo').value;
+            const branch = document.getElementById('branch').value;
+
+            const output = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Roll No:</strong> ${rollNo}</p>
+                <p><strong>Branch:</strong> ${branch}</p>
+            `;
+
+            document.getElementById('output').innerHTML = output;
+        }
+    </script>
+</body>
+</html>
